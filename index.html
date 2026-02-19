@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Saint Simon Studio | Brand & Digital Content Development</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Page Loader Overlay -->
+    <div
+      id="loader"
+      class="loader-overlay"
+      aria-hidden="false"
+      role="status"
+      aria-live="polite"
+    >
+      <div class="loader-box" aria-label="Loading">
+        <div class="loader-bar"></div>
+      </div>
+    </div>
+    <img
+      src="images/IMG_7582.jpeg"
+      alt="Saint Simon Studio Logo"
+      class="logo"
+    />
+    <h1>SAINT SIMON STUDIO</h1>
+
+    <script>
+      (function () {
+        const loader = document.getElementById("loader");
+        const MIN_DISPLAY = 4000; // 4 seconds
+        const start = Date.now();
+        let hidden = false;
+
+        const doHide = () => {
+          if (!hidden && loader) {
+            hidden = true;
+            loader.classList.add("is-hidden");
+          }
+        };
+
+        const scheduleHide = () => {
+          const elapsed = Date.now() - start;
+          const remaining = Math.max(0, MIN_DISPLAY - elapsed);
+          setTimeout(doHide, remaining);
+        };
+
+        if (document.readyState === "complete") {
+          scheduleHide();
+        } else {
+          window.addEventListener("load", scheduleHide);
+          // Hard fallback to ensure 4s max even if 'load' never fires
+          setTimeout(doHide, MIN_DISPLAY);
+        }
+      })();
+    </script>
+    <!-- Services first, then View Our Work button -->
+    <ul class="services">
+      <li class="has-subtext">
+        <span class="service-title">Creative Strategy</span>
+        <span class="service-subtext"
+          >campaigning and creating markets through science that is art, and art
+          that is scientific.</span
+        >
+      </li>
+      <li class="has-subtext">
+        <span class="service-title">Brand identity design</span>
+        <span class="service-subtext"
+          >comprehensive direction of sensory engagement, aiming to keep
+          sensory's engaged</span
+        >
+      </li>
+      <li class="has-subtext">
+        <span class="service-title">Web Builder</span>
+        <span class="service-subtext"
+          >Crafting Cross Platform digital content and pages aligned with
+          proprietary identity</span
+        >
+      </li>
+      <li class="has-subtext style-guide-item">
+        <span class="service-title">Style guide</span>
+        <span class="service-subtext"
+          >a rubric for your brand or project's visual cadence</span
+        >
+      </li>
+    </ul>
+
+    <h2 class="work-block">View Our Work</h2>
+    <a class="cta" href="viewourwork.html" aria-label="View our work"
+      >View Our Work</a
+    >
+
+    <!-- Subtitle then Strategy Call button -->
+    <h2 class="summon-block">SUMMON SAINT SIMON</h2>
+    <a
+      class="cta"
+      href="https://calendly.com/saintsimonstudio"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Book a strategy call"
+      >Book a Strategy Call</a
+    >
+
+    <!-- Get a Proposal with form -->
+    <h2 class="proposal-block">Get a Proposal</h2>
+    <p class="prompt">
+      Describe your project. How much do you want it to cost?
+    </p>
+    <form
+      action="https://formsubmit.co/saintsimonstudio@gmail.com"
+      method="POST"
+    >
+      <!-- FormSubmit config -->
+      <input
+        type="hidden"
+        name="_subject"
+        value="New proposal request from Saint Simon Studio"
+      />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value="/thank-you.html" />
+      <input type="hidden" name="_replyto" value="{{email}}" />
+      <input
+        type="text"
+        name="_honey"
+        style="display: none"
+        tabindex="-1"
+        autocomplete="off"
+      />
+      <label>Name:</label><br />
+      <input type="text" name="name" required /><br /><br />
+      <label>Email:</label><br />
+      <input type="email" name="email" required /><br /><br />
+      <label>Project Details:</label><br />
+      <textarea name="details" rows="4" cols="50" required></textarea
+      ><br /><br />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <!-- Contact row: location + phone side by side -->
+    <div class="contact-row" aria-label="Contact">
+      <span>San Francisco, CA</span>
+      <span>(925)545-7695</span>
+    </div>
+
+    <!-- Study subtitle then social buttons -->
+    <h2 class="study-block">STUDY SAINT SIMON</h2>
+
+    <footer class="socials" aria-label="Social links">
+      <a
+        class="ig"
+        href="https://instagram.com/saintsimonstudio"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram"
+        title="Instagram"
+      >
+        <img src="https://cdn.simpleicons.org/instagram/c3ccfb" alt="" />
+      </a>
+      <a
+        class="tiktok"
+        href="https://www.tiktok.com/saintsimonstudio"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="TikTok"
+        title="TikTok"
+      >
+        <img src="https://cdn.simpleicons.org/tiktok/c3ccfb" alt="" />
+      </a>
+      <a
+        class="x"
+        href="https://www.x.com/saintsim_studio"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="X"
+        title="X"
+      >
+        <img src="https://cdn.simpleicons.org/x/c3ccfb" alt="" />
+      </a>
+      <a
+        class="behance"
+        href="https://behance.com/saintsimonstudio"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Behance"
+        title="Behance"
+      >
+        <img src="https://cdn.simpleicons.org/behance/c3ccfb" alt="" />
+      </a>
+      <a
+        class="github"
+        href="https://github.com/saintsimonstudio"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub"
+        title="GitHub"
+      >
+        <img src="https://cdn.simpleicons.org/github/c3ccfb" alt="" />
+      </a>
+    </footer>
+  </body>
+</html>
