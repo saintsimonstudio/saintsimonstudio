@@ -1,0 +1,503 @@
+/* Lift 'Get a Proposal' heading by 1.25em (to -1.625em) */
+.proposal-block {
+  transform: translateY(-1.625em);
+}
+/* Lift 'Describe your project' prompt by 1.875em */
+.proposal-block + .prompt {
+  transform: translateY(-1.875em);
+}
+/* Raise the 'SUMMON SAINT SIMON' heading and its adjacent CTA by 1.875em */
+.summon-block,
+.summon-block + .cta {
+  transform: translateY(-1.875em);
+}
+/* Raise the 'View Our Work' heading and its adjacent CTA by 2.875em (1.5em + 1.375em) */
+.work-block,
+.work-block + .cta {
+  transform: translateY(-2.875em);
+}
+/* Inline subtext next to Style guide */
+:root {
+  --sand: #fee8b7;
+  --lilac: #c3ccfb;
+  --mint: #25fab3;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-family: "Pirata One", serif;
+  font-size: 20px; /* 1.25x base scale */
+  line-height: 1.5;
+  color: var(--lilac);
+  background-color: var(--sand);
+  position: relative; /* enable ::before overlay */
+}
+
+/* Typographic hierarchy (bigger near the top hero, tapering down) */
+h1 {
+  font-size: calc(1.5 * clamp(2.6rem, 6vw, 4rem));
+  letter-spacing: 1px;
+  margin: 0.25em 0 0.15em;
+  transform: translateY(-1.5em);
+}
+
+.tagline {
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  margin: 0 0 0.6em;
+}
+
+h2 {
+  font-size: calc(1.5 * clamp(1.4rem, 3.2vw, 2rem));
+  margin: 1.2em 0 0.4em;
+}
+
+p,
+a,
+label {
+  font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+}
+
+/* Scale the proposal prompt and CTAs by 1.5x */
+.prompt {
+  font-size: calc(1.5 * clamp(1.1rem, 1.8vw, 1.3rem));
+}
+.cta {
+  font-size: calc(1.5 * clamp(1.1rem, 1.8vw, 1.3rem));
+}
+
+/* Removed 'cta-work' lift per undo request */
+
+.services li {
+  font-size: calc(1.5 * clamp(1.2rem, 2.2vw, 1.5rem));
+  transform: translateY(-3em);
+}
+
+/* Service description block stacked under services row */
+.services li .service-subtext {
+  display: block;
+  font-size: 0.765625em; /* another 1.75x increase over 0.4375em */
+  line-height: 1.3;
+  margin-top: 0.25em;
+  color: inherit;
+}
+
+/* Style guide description: mint fill with lilac stroke (outside) */
+/* Removed special Style guide description styling to unify with titles */
+
+/* Match contact row text size to services/prompt */
+.contact-row,
+.contact-row span {
+  font-size: calc(1.5 * clamp(1.2rem, 2.2vw, 1.5rem));
+}
+
+button,
+input,
+textarea,
+select,
+input[type="submit"] {
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+}
+
+/* Radial focus overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    60% 40% at 50% 30%,
+    rgba(255, 255, 255, 0.16),
+    transparent 60%
+  );
+  z-index: 0;
+}
+
+.logo {
+  position: static; /* do not follow scroll */
+  width: 120px;
+  height: auto;
+  margin: 16px;
+  justify-self: start; /* align left within centered grid */
+  /* removed vertical transform per undo */
+}
+
+/* Contact row: location + phone side by side */
+.contact-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin: 16px 0;
+  transform: translateY(1.5em);
+}
+
+/* Social links at bottom */
+.socials {
+  position: static; /* sit at bottom of content, not viewport */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 32px 0 16px;
+}
+.socials a {
+  display: inline-flex;
+}
+.socials img {
+  width: 32px;
+  height: 32px;
+  transition: transform 150ms ease, filter 150ms ease;
+}
+.socials a:hover img,
+.socials a:focus-visible img {
+  transform: translateY(-1px) scale(1.05);
+}
+
+/* Loader overlay */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(254, 232, 183, 0.92); /* sand tint */
+  backdrop-filter: blur(2px);
+  display: grid;
+  place-items: center;
+}
+.loader-overlay.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 280ms ease, visibility 0s linear 280ms;
+}
+.loader-box {
+  width: min(520px, 80vw);
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12),
+    0 0 0 2px rgba(195, 204, 251, 0.35);
+}
+.loader-bar {
+  height: 14px;
+  border-radius: 8px;
+  transform-origin: left center;
+  animation: loadGrow 4000ms ease-out forwards;
+  background: linear-gradient(
+    to bottom,
+    var(--mint) 0%,
+    var(--sand) 50%,
+    var(--lilac) 100%
+  );
+  box-shadow: 0 0 6px rgba(37, 250, 179, 0.45),
+    0 0 12px rgba(195, 204, 251, 0.45);
+}
+@keyframes loadGrow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Static per-icon glow and mint outline */
+.socials a.ig img {
+  /* lilac static glow + lilac outline */
+  filter: drop-shadow(0 1px 0 var(--lilac)) drop-shadow(0 -1px 0 var(--lilac))
+    drop-shadow(1px 0 0 var(--lilac)) drop-shadow(-1px 0 0 var(--lilac))
+    drop-shadow(0 0 6px var(--lilac))
+    drop-shadow(0 0 10px rgba(195, 204, 251, 0.6));
+}
+.socials a.tiktok img {
+  /* mint static glow + mint outline */
+  filter: drop-shadow(0 1px 0 var(--mint)) drop-shadow(0 -1px 0 var(--mint))
+    drop-shadow(1px 0 0 var(--mint)) drop-shadow(-1px 0 0 var(--mint))
+    drop-shadow(0 0 6px var(--mint))
+    drop-shadow(0 0 10px rgba(37, 250, 179, 0.6));
+}
+.socials a.x img {
+  /* lilac static glow + lilac outline */
+  filter: drop-shadow(0 1px 0 var(--lilac)) drop-shadow(0 -1px 0 var(--lilac))
+    drop-shadow(1px 0 0 var(--lilac)) drop-shadow(-1px 0 0 var(--lilac))
+    drop-shadow(0 0 6px var(--lilac))
+    drop-shadow(0 0 10px rgba(195, 204, 251, 0.6));
+}
+.socials a.behance img {
+  /* mint static glow + mint outline */
+  filter: drop-shadow(0 1px 0 var(--mint)) drop-shadow(0 -1px 0 var(--mint))
+    drop-shadow(1px 0 0 var(--mint)) drop-shadow(-1px 0 0 var(--mint))
+    drop-shadow(0 0 6px var(--mint))
+    drop-shadow(0 0 10px rgba(37, 250, 179, 0.6));
+}
+.socials a.github img {
+  /* lilac static glow + lilac outline */
+  filter: drop-shadow(0 1px 0 var(--lilac)) drop-shadow(0 -1px 0 var(--lilac))
+    drop-shadow(1px 0 0 var(--lilac)) drop-shadow(-1px 0 0 var(--lilac))
+    drop-shadow(0 0 6px var(--lilac))
+    drop-shadow(0 0 10px rgba(195, 204, 251, 0.6));
+}
+
+/* Per-icon hover glow colors */
+.socials a.ig:hover img,
+.socials a.ig:focus-visible img {
+  /* lilac glow */
+  filter: drop-shadow(0 1px 0 var(--lilac)) drop-shadow(0 -1px 0 var(--lilac))
+    drop-shadow(1px 0 0 var(--lilac)) drop-shadow(-1px 0 0 var(--lilac))
+    drop-shadow(0 0 8px var(--lilac))
+    drop-shadow(0 0 14px rgba(195, 204, 251, 0.7));
+}
+
+.socials a.tiktok:hover img,
+.socials a.tiktok:focus-visible img {
+  /* mint glow */
+  filter: drop-shadow(0 1px 0 var(--mint)) drop-shadow(0 -1px 0 var(--mint))
+    drop-shadow(1px 0 0 var(--mint)) drop-shadow(-1px 0 0 var(--mint))
+    drop-shadow(0 0 8px var(--mint))
+    drop-shadow(0 0 14px rgba(37, 250, 179, 0.7));
+}
+
+.socials a.x:hover img,
+.socials a.x:focus-visible img {
+  /* lilac glow */
+  filter: drop-shadow(0 1px 0 var(--lilac)) drop-shadow(0 -1px 0 var(--lilac))
+    drop-shadow(1px 0 0 var(--lilac)) drop-shadow(-1px 0 0 var(--lilac))
+    drop-shadow(0 0 8px var(--lilac))
+    drop-shadow(0 0 14px rgba(195, 204, 251, 0.7));
+}
+
+.socials a.behance:hover img,
+.socials a.behance:focus-visible img {
+  /* mint glow */
+  filter: drop-shadow(0 1px 0 var(--mint)) drop-shadow(0 -1px 0 var(--mint))
+    drop-shadow(1px 0 0 var(--mint)) drop-shadow(-1px 0 0 var(--mint))
+    drop-shadow(0 0 8px var(--mint))
+    drop-shadow(0 0 14px rgba(37, 250, 179, 0.7));
+}
+
+.socials a.github:hover img,
+.socials a.github:focus-visible img {
+  /* lilac glow */
+  filter: drop-shadow(0 1px 0 var(--lilac)) drop-shadow(0 -1px 0 var(--lilac))
+    drop-shadow(1px 0 0 var(--lilac)) drop-shadow(-1px 0 0 var(--lilac))
+    drop-shadow(0 0 8px var(--lilac))
+    drop-shadow(0 0 14px rgba(195, 204, 251, 0.7));
+}
+
+/* Services list without bullets */
+.services {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: nowrap; /* force single line */
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.6em 1.2em;
+}
+.has-subtext {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+.has-subtext .service-title {
+  white-space: nowrap; /* keep phrase width stable */
+}
+.has-subtext .service-subtext {
+  max-width: 12ch; /* constrain to approx title width */
+  text-align: center;
+  word-break: break-word;
+}
+.services li,
+.services li .service-title,
+.services li .service-subtext,
+.tagline,
+.prompt,
+.contact-row,
+.contact-row span {
+  color: var(--mint);
+  /* Trim: mint text outlined in lilac (outside form) */
+  -webkit-text-stroke: 0.8px var(--lilac);
+  text-shadow: 0 1px 0 var(--lilac), 0 -1px 0 var(--lilac), 1px 0 0 var(--lilac),
+    -1px 0 0 var(--lilac);
+  transition: text-shadow 160ms ease, transform 160ms ease;
+}
+
+/* Make title hover area reliable and show glow when LI is hovered */
+.service-title {
+  display: inline-block;
+  cursor: pointer;
+}
+.service-subtext {
+  cursor: pointer;
+}
+.has-subtext:hover .service-title {
+  text-shadow: 0 1px 0 var(--lilac), 0 -1px 0 var(--lilac), 1px 0 0 var(--lilac),
+    -1px 0 0 var(--lilac), 0 0 6px var(--mint), 0 0 12px rgba(37, 250, 179, 0.5);
+}
+
+a,
+button,
+input[type="submit"] {
+  color: var(--lilac);
+  background: linear-gradient(
+    to bottom,
+    var(--mint) 0%,
+    var(--sand) 50%,
+    var(--lilac) 100%
+  );
+  padding: 6px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: none;
+  transition: transform 160ms ease, box-shadow 180ms ease,
+    background-position 220ms ease;
+  background-size: 200% 200%;
+  background-position: 50% 0%;
+  /* Trim: mint link text outlined in lilac (links are outside form) */
+  -webkit-text-stroke: 0.8px var(--lilac);
+  text-shadow: 0 1px 0 var(--lilac), 0 -1px 0 var(--lilac), 1px 0 0 var(--lilac),
+    -1px 0 0 var(--lilac);
+}
+
+/* Trim: lilac text outlined in mint (outside form) */
+h1,
+h2 {
+  -webkit-text-stroke: 0.8px var(--mint);
+  text-shadow: 0 1px 0 var(--mint), 0 -1px 0 var(--mint), 1px 0 0 var(--mint),
+    -1px 0 0 var(--mint);
+  transition: text-shadow 160ms ease, transform 160ms ease;
+}
+
+/* Make key headings match service title styling (mint fill, lilac edge) */
+.summon-block,
+.work-block,
+.proposal-block,
+.study-block {
+  color: var(--mint);
+  -webkit-text-stroke: 0.8px var(--lilac);
+  text-shadow: 0 1px 0 var(--lilac), 0 -1px 0 var(--lilac), 1px 0 0 var(--lilac),
+    -1px 0 0 var(--lilac);
+}
+
+/* Use mint glow on hover to match service titles */
+.summon-block:hover,
+.work-block:hover,
+.proposal-block:hover,
+.study-block:hover {
+  text-shadow: 0 1px 0 var(--lilac), 0 -1px 0 var(--lilac), 1px 0 0 var(--lilac),
+    -1px 0 0 var(--lilac), 0 0 6px var(--mint), 0 0 12px rgba(37, 250, 179, 0.5);
+}
+
+/* Micro-animations on interaction */
+a:hover,
+button:hover,
+input[type="submit"]:hover,
+a:focus-visible,
+button:focus-visible,
+input[type="submit"]:focus-visible {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 16px rgba(37, 250, 179, 0.3),
+    0 0 0 2px rgba(37, 250, 179, 0.35);
+  background-position: 50% 100%;
+  outline: none;
+}
+
+/* Lilac hover glow for the specific CTAs under these headings */
+.work-block + .cta:hover,
+.summon-block + .cta:hover {
+  text-shadow: 0 0 6px var(--lilac), 0 0 12px rgba(195, 204, 251, 0.6);
+  box-shadow: 0 6px 16px rgba(195, 204, 251, 0.35),
+    0 0 0 2px rgba(195, 204, 251, 0.4);
+  /* Reverse gradient on hover */
+  background: linear-gradient(
+    to bottom,
+    var(--lilac) 0%,
+    var(--sand) 50%,
+    var(--mint) 100%
+  );
+  background-position: 50% 0%;
+}
+
+/* Text hover glow: tagline/prompt/services mint glow */
+.services li:not(.has-subtext):hover,
+.tagline:hover,
+.prompt:hover,
+.contact-row:hover,
+.contact-row span:hover {
+  text-shadow: 0 0 6px var(--mint), 0 0 12px rgba(37, 250, 179, 0.5);
+}
+
+/* Independent hover effects for Style guide title and description */
+.service-title:hover {
+  text-shadow: 
+    /* keep outline */ 0 1px 0 var(--lilac),
+    0 -1px 0 var(--lilac), 1px 0 0 var(--lilac), -1px 0 0 var(--lilac),
+    /* add mint glow */ 0 0 6px var(--mint), 0 0 12px rgba(37, 250, 179, 0.5);
+}
+.service-subtext:hover {
+  text-shadow:
+    /* keep outline */ 0 1px 0 var(--lilac), 0 -1px 0 var(--lilac),
+    1px 0 0 var(--lilac), -1px 0 0 var(--lilac),
+    /* add mint glow */ 0 0 6px var(--mint), 0 0 12px rgba(37, 250, 179, 0.5);
+}
+
+/* Also glow descriptions when the parent LI is hovered */
+.has-subtext:hover .service-subtext {
+  text-shadow: 0 1px 0 var(--lilac), 0 -1px 0 var(--lilac), 1px 0 0 var(--lilac),
+    -1px 0 0 var(--lilac), 0 0 6px var(--mint), 0 0 12px rgba(37, 250, 179, 0.5);
+}
+
+/* Text hover glow: headings lilac glow */
+h1:hover,
+h2:hover {
+  text-shadow: 0 0 6px var(--lilac), 0 0 12px rgba(195, 204, 251, 0.6);
+}
+
+/* Page-specific adjustment: lower 'View Our Work' heading on viewourwork.html by 1.5em */
+.viewourwork .work-block {
+  transform: translateY(0em);
+  font-size: calc(2.8359375 * clamp(1.4rem, 3.2vw, 2rem));
+}
+
+form {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 16px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+  display: inline-block;
+  text-align: left;
+  border: 1px solid rgba(195, 204, 251, 0.45);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 180ms ease, transform 160ms ease,
+    background-color 160ms ease;
+}
+
+form:hover {
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18),
+    0 0 0 2px rgba(37, 250, 179, 0.35);
+  transform: translateY(-2px);
+}
+
+label {
+  font-weight: 600;
+}
+input,
+textarea {
+  width: 280px;
+  max-width: 100%;
+}
+/* Ensure form controls use the site font */
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+input[type="submit"] {
+  cursor: pointer;
+}
